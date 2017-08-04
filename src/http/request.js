@@ -1,12 +1,11 @@
 //这是网络请求进行的稍微封装， 使代码风格保持一致
 
 
+import Toast from "../utils/Toast";
 export default async (url, config) => {
 
-    let token = global.token;
-
     //拼接url
-    url = `http://${env[global.defaultUrl]}/${url}`;
+    url = `http://gank.io/api/${url}`;
 
     //获取传递的参数以及请求方式 'GET' 'POST' 默认是'GET'
     let {method, data} = config;
@@ -14,10 +13,7 @@ export default async (url, config) => {
     if (!data) {
         data = {};
     }
-    //添加请求token
-    data.token = token;
 
-    console.log('请求token  = ' + data.token);
     requestConfig.method = method || 'GET';
 
     //根据传递参数 进行url拼接 url?xxx=xxx&
@@ -34,6 +30,7 @@ export default async (url, config) => {
         requestConfig.body = searchParams;
         console.log('POST请求url = ' + url + '-请求参数 = ' + requestConfig.body);
     }
+
     if (requestConfig.method === 'GET') {
         url = `${url}?${searchParams}`;
 
@@ -44,19 +41,8 @@ export default async (url, config) => {
     return fetch(url, requestConfig)
         .then(response => response.json())
         .then(res => {
-            if (res.status !== 0) {
-
-                if (res.status === 2) {
-                    //token失效
-                    Toast('服务器繁忙,请稍后重试!', {duration: 1000});
-                    //刷新token
-                    userToken();
-                } else {
-                    Toast(res.msg);
-                }
-                return;
-            } else {
-                console.log('获取数据',res.data)
+            if (!res.error) {
+                console.log('获取数据', res.results)
                 return res;
             }
         }).catch(err => {
