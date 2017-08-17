@@ -1,9 +1,10 @@
 import Toast from 'react-native-root-toast';
+import {pxToDp} from "./ScreenUtil";
 
 export default (content, options) => {
   let toast = Toast.show(content, {
     duration: Toast.durations.SHORT,
-    position: 0,
+    position: pxToDp(-180),
     shadow: false,
     textColor: '#fff',
     animation: true,
