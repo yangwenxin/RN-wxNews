@@ -26,20 +26,24 @@ const TabOptions = (tabBarTitle, icon, navTitle) => {
         return (
             <Image
                 source={icon}
-                style={[{height: pxToDp(45), width: pxToDp(45),marginBottom:3,}, {tintColor: tintColor}]}
+                style={[{height: pxToDp(45), width: pxToDp(45), marginBottom: pxToDp(12),}, {tintColor: tintColor}]}
             />
         )
     });
+
     const headerTitleStyle = {
         color: 'white',
         fontWeight: 'normal',
         alignSelf: 'center',
         headerBackTitle: null,
+        fontSize:pxToDp(30),
     };
+
     const headerTitle = navTitle;
     // header的style
-    const headerStyle = {backgroundColor: '#7e83e3'};
+    const headerStyle = {backgroundColor: '#7e83e3', height: pxToDp(90),};
     const tabBarVisible = true;
+
 
     if (navTitle == null) {
         return {tabBarLabel, tabBarIcon, headerTitle, headerTitleStyle, headerStyle, tabBarVisible, header};
@@ -82,16 +86,15 @@ const MyTab = new TabNavigator({
         tabBarOptions: {
             // tabbar上label的style
             labelStyle: {
-                fontSize:pxToDp(18),
-                alignSelf:'center',
-
-                marginTop:1,
+                fontSize: pxToDp(22),
+                alignSelf: 'center',
+                marginTop: pxToDp(-8),
             },
 
             // tabbar的Iconstyle
             iconStyle: {
-                height: pxToDp(50),
-                width: pxToDp(50),
+                height: pxToDp(58),
+                width: pxToDp(60),
             },
             // tabbar的style
             style: {

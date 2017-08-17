@@ -1,6 +1,3 @@
-//这是网络请求进行的稍微封装， 使代码风格保持一致
-
-
 import Toast from "../utils/Toast";
 export default async (url, config) => {
 
@@ -42,12 +39,12 @@ export default async (url, config) => {
         .then(response => response.json())
         .then(res => {
             if (!res.error) {
-                console.log('获取数据', res.results)
+                console.log('获取数据', res.results);
+                console.log('获取数据', res.category);
                 return res;
             }
         }).catch(err => {
             console.log('请求失败' + err);
-            Toast('网络异常');
         })
 };
 
