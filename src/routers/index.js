@@ -7,7 +7,7 @@ import {Image, View} from "react-native";
 
 import Home from "../ui/Home";
 import {TabNavigator} from "react-navigation";
-import Find from "../ui/Find";
+import Find from "../ui/Discovery";
 import Collect from "../ui/Collect";
 import More from "../ui/More";
 import {pxToDp} from "../utils/ScreenUtil";

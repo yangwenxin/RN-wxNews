@@ -17,6 +17,7 @@ import {getCurrentDate, getYesterdayFromDate} from "../utils/DateUtils";
 import * as Actions from "../redux/actions/requestHomeData";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+import SectionListForHome from "../components/SectionListForHome";
 
 
 class Home extends Component {
@@ -24,24 +25,35 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            opacity: new Animated.Value(0),
+            scrollDist: new Animated.Value(0),
         };
-        this.imageHeight = pxToDp(700);
+        this.imageHeight = pxToDp(900);
         this.tabIcon = ['logo-android', 'logo-apple', 'logo-chrome', 'ios-film', 'ios-book', 'ios-apps', 'ios-radio'];
     }
 
     //界面渲染完回调该方法
     componentDidMount() {
-        this.props.actions.fetchHomeData(getCurrentDate());
+        this.fetchData();
     }
 
+    async fetchData() {
+        this.props.actions.fetchHomeData(getCurrentDate());
+        this.props.actions.fetchMeiZiData();
+    }
 
     render() {
-        let {loading, dataSource, hasData} = this.props;
+        let {loading, dataSource, hasData, meiziData} = this.props;
+        let random = Math.round(Math.random() * 99);
+
+
+        let opacity = this.state.scrollDist.interpolate({
+            inputRange: [0, 400],
+            outputRange: [0, 1]
+        })
 
         return (
             <View style={styles.container}>
-                <Animated.View style={[styles.toolbar, {opacity: this.state.opacity}]}>
+                <Animated.View style={[styles.toolbar, {opacity: opacity}]}>
                     <StatusBar
                         backgroundColor="#7e83e3"
                         barStyle="light-content"
@@ -60,11 +72,14 @@ class Home extends Component {
                             style={{color: 'white', fontSize: pxToDp(30),}}
                         >最新干货</Text>
                     </View>
+
                 </Animated.View>
 
                 <ScrollView
                     scrollEnabled={this.state.scrollEnabled}
-                    onScroll={this._onScroll.bind(this)}
+                    onScroll={Animated.event(
+                        [{ nativeEvent: { contentOffset: { y: this.state.scrollDist } } }]
+                    )}
                     refreshControl={
 
                         <RefreshControl
@@ -73,13 +88,21 @@ class Home extends Component {
                         />
                     }
                 >
-                    {((hasData && dataSource.category.length > 0) ?
+                    {((hasData && meiziData.length > 0) ?
                             <View>
                                 <View style={{height: this.imageHeight, width: theme.screenWidth}}>
                                     <ImageView
-                                        imgUrl={dataSource.results.福利[0].url}
+                                        imgUrl={meiziData[random].url}
                                         labelTime={getCurrentDate()}/>
                                 </View>
+
+                                <View>
+                                    {/*列表*/}
+                                    <SectionListForHome
+                                        dataSource={dataSource}
+                                    />
+                                </View>
+
                             </View>
                             : null
                     )}
@@ -93,21 +116,6 @@ class Home extends Component {
     _onRefresh() {
         this.props.actions.fetchHomeData(getCurrentDate());
     }
-
-
-    _onScroll(event) {
-        var offsetY = event.nativeEvent.contentOffset.y;
-        console.log('offsetY', offsetY);
-
-        if (offsetY <= this.imageHeight - theme.toolbar.height) {
-            var opacity = offsetY / (this.imageHeight - theme.toolbar.height);
-            this.setState({opacity: opacity});
-        } else {
-            this.setState({opacity: 1});
-        }
-    }
-
-
 }
 
 class ImageView extends Component {
@@ -139,7 +147,7 @@ const styles = StyleSheet.create({
     },
     img: {
         width: theme.screenWidth,
-        height: pxToDp(700),
+        height: pxToDp(900),
         resizeMode: 'cover'
     },
     dateLabel: {
@@ -165,8 +173,8 @@ const mapStateToProps = (state) => {
         loading: state.HomeReducer.loading,
         hasData: state.HomeReducer.hasData,
         dataSource: state.HomeReducer.dataSource,
+        meiziData: state.HomeReducer.meiziData,
     }
-
 }
 
 const mapDispatchToProps = (dispatch) => {

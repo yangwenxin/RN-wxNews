@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import Toast from "../../utils/Toast";
-import {getDaily, getRandom} from "../../http/api";
+import * as api from "../../http/api";
 import {getYesterdayFromDate} from "../../utils/DateUtils";
 import * as types from "../actions/Types";
 
@@ -21,27 +21,77 @@ function requestSuccess(res) {
     }
 }
 
-function requestData() {
+function requestFailure() {
     return {
-        type: types.FETCH_HOME_DATA_REQUEST,
+        type: types.FETCH_HOME_DATA_FAILURE,
     }
+}
+
+
+function requestMeiZiSuccess(res) {
+    return {
+        type: types.FETCH_MEIZI_DATA_SUCCESS,
+        meiziData: res.results,
+    }
+}
+
+function handleData(res, keys) {
+
+    return (dispatch => {
+
+        let data = res.results;
+        let list = Object.keys(data).map(key => {
+            return data[key];
+        });
+        list.map(item => {
+            //遍历data数据 通过item.date获取section
+            item.map(childItem => {
+                if (childItem.type !== '福利') {
+                    let section = keys[childItem.type];
+                    if (!section) {
+                        //获取section不存在，创建一个section存入keys， key为date
+                        section = {data: [], key: childItem.type};
+                        keys[childItem.type] = section;
+                    }
+                    //section.data添加任务数据
+                    section.data.push(childItem);
+                }
+            })
+        });
+        dispatch(requestSuccess(keys));
+    })
 }
 
 export function fetchHomeData(date) {
 
     return (dispatch => {
-        dispatch(requestData())
-        getDaily(date)
-            .then(res => {
-                if (isValidData(res)) {
-                    dispatch(requestSuccess(res));
-                } else {
-                    fetchHomeData(getYesterdayFromDate(date));
-                }
+        api.getDaily(date).then(res => {
+            if (isValidData(res)) {
+                dispatch(handleData(res, {}));
+            } else {
+                dispatch(fetchHomeData(getYesterdayFromDate(date)));
+            }
 
-            }).catch(error => {
-            Toast('获取数据失败');
-        });
+        })
+            .catch(error => {
+                dispatch(requestFailure());
+            });
     })
+}
+
+
+export function fetchMeiZiData() {
+    return (dispatch => {
+        api.getMeiziData("福利", 1)
+            .then(res => {
+                if (!res.error && res.results.length > 0) {
+                    dispatch(requestMeiZiSuccess(res));
+                }
+            })
+            .catch(error => {
+                dispatch(requestFailure());
+            })
+    });
+
 
 }
