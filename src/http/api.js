@@ -9,8 +9,8 @@ export const getCommonData = (type, page) => {
 }
 
 export const getDaily = (date) => {
+    console.log('请求时间', date);
     return request(`day/${date}`, {});
-
 }
 
 export const getRandom = (url) => {
@@ -18,5 +18,8 @@ export const getRandom = (url) => {
 }
 
 
+export const getMeiziData = (type, page) => {
+    return request(`data/${type}/100/${page}`, {});
+}
 
 

@@ -25,13 +25,13 @@ export default async (url, config) => {
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
         };
         requestConfig.body = searchParams;
-        console.log('POST请求url = ' + url + '-请求参数 = ' + requestConfig.body);
+        // console.log('POST请求url = ' + url + '-请求参数 = ' + requestConfig.body);
     }
 
     if (requestConfig.method === 'GET') {
         url = `${url}?${searchParams}`;
 
-        console.log('GET请求url = ' + url);
+        // console.log('GET请求url = ' + url);
     }
 
     //请求 返回数据
@@ -39,8 +39,8 @@ export default async (url, config) => {
         .then(response => response.json())
         .then(res => {
             if (!res.error) {
-                console.log('获取数据', res.results);
-                console.log('获取数据', res.category);
+                // console.log('获取数据', res.results);
+                // console.log('获取数据', res.category);
                 return res;
             }
         }).catch(err => {

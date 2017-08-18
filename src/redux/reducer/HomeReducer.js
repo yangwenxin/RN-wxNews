@@ -6,9 +6,11 @@ import * as types from "../actions/Types";
 
 //定义初始化数据
 const initialState = {
-    loading: false,
+    loading: true,
     hasData: false,
     dataSource: {},
+    meiziData: [],
+    mzData:false,
 }
 
 
@@ -17,7 +19,6 @@ export default function HomeReducer(state = initialState, action) {
     switch (action.type) {
 
         case types.FETCH_HOME_DATA_SUCCESS: {
-            //数据请求成功
             return Object.assign({}, state, {
                 ...state,
                 loading: false,
@@ -26,13 +27,22 @@ export default function HomeReducer(state = initialState, action) {
             });
         }
 
-        case types.FETCH_HOME_DATA_REQUEST: {
+        case types.FETCH_HOME_DATA_FAILURE: {
             return Object.assign({}, state, {
                 ...state,
-                loading: true,
+                loading: false,
                 hasData: false,
-            });
+            })
         }
+
+        case types.FETCH_MEIZI_DATA_SUCCESS: {
+
+            return Object.assign({}, state, {
+                ...state,
+                meiziData:action.meiziData,
+            })
+        }
+
 
         default:
             return state;

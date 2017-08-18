@@ -8,7 +8,7 @@ import {
  * Created by wenxin on 2017/8/4.
  */
 
-export default class Find extends Component {
+export default class Discovery extends Component {
 
     constructor(props) {
         super(props);
