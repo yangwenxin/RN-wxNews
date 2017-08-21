@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import {Image, View} from "react-native";
+import {Image, Platform} from "react-native";
 
 import Home from "../ui/Home";
 import {TabNavigator} from "react-navigation";
@@ -26,7 +26,14 @@ const TabOptions = (tabBarTitle, icon, navTitle) => {
         return (
             <Image
                 source={icon}
-                style={[{height: pxToDp(45), width: pxToDp(45), marginBottom: pxToDp(12),}, {tintColor: tintColor}]}
+                style={[{
+                    height: pxToDp(45),
+                    width: pxToDp(45),
+                    marginBottom: Platform.OS === 'android' ?pxToDp(12):pxToDp(10),
+                }, {
+                    tintColor: tintColor
+                }
+                ]}
             />
         )
     });
@@ -36,12 +43,16 @@ const TabOptions = (tabBarTitle, icon, navTitle) => {
         fontWeight: 'normal',
         alignSelf: 'center',
         headerBackTitle: null,
-        fontSize:pxToDp(30),
+        fontSize: pxToDp(30),
     };
 
     const headerTitle = navTitle;
+
     // header的style
-    const headerStyle = {backgroundColor: '#7e83e3', height: pxToDp(90),};
+    const headerStyle = {
+        backgroundColor: '#7e83e3',
+        height: Platform.OS === 'android' ? pxToDp(90) : pxToDp(110),
+    };
     const tabBarVisible = true;
 
 
@@ -89,8 +100,8 @@ const MyTab = new TabNavigator({
                 fontSize: pxToDp(22),
                 alignSelf: 'center',
                 marginTop: pxToDp(-8),
+                marginBottom: Platform.OS === 'android' ? 0 : pxToDp(10),
             },
-
             // tabbar的Iconstyle
             iconStyle: {
                 height: pxToDp(58),

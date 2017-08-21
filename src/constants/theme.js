@@ -10,7 +10,6 @@ export default {
     screenHeight: Dimensions.get('window').height,
     screenWidth: Dimensions.get('window').width,
     toolbar: {
-        height: pxToDp(90),
-
+        height: Platform.OS === 'android' ? pxToDp(90) : pxToDp(110),
     }
 }

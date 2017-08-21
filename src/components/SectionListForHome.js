@@ -77,7 +77,7 @@ export default class SectionListForHome extends Component {
     }
 
     _renderSectionHeader = ({section}) => {
-        let width = pxToDp(80);
+        let width = pxToDp(50);
         return (
 
             <View
