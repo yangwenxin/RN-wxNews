@@ -8,12 +8,14 @@ import {
     View,
     Animated,
     RefreshControl,
-    StyleSheet, Image, ScrollView
+    StyleSheet,
+    Image,
+    ScrollView,
+    Platform
 } from 'react-native';
 import {pxToDp} from "../utils/ScreenUtil";
-import Toast from "../utils/Toast";
 import theme from "../constants/theme";
-import {getCurrentDate, getYesterdayFromDate} from "../utils/DateUtils";
+import {getCurrentDate} from "../utils/DateUtils";
 import * as Actions from "../redux/actions/requestHomeData";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
@@ -28,7 +30,6 @@ class Home extends Component {
             scrollDist: new Animated.Value(0),
         };
         this.imageHeight = pxToDp(900);
-        this.tabIcon = ['logo-android', 'logo-apple', 'logo-chrome', 'ios-film', 'ios-book', 'ios-apps', 'ios-radio'];
     }
 
     //界面渲染完回调该方法
@@ -45,20 +46,18 @@ class Home extends Component {
         let {loading, dataSource, hasData, meiziData} = this.props;
         let random = Math.round(Math.random() * 99);
 
-
         let opacity = this.state.scrollDist.interpolate({
             inputRange: [0, 400],
             outputRange: [0, 1]
-        })
+        });
 
         return (
             <View style={styles.container}>
+                <StatusBar
+                    backgroundColor="#7e83e3"
+                    barStyle="light-content"
+                />
                 <Animated.View style={[styles.toolbar, {opacity: opacity}]}>
-                    <StatusBar
-                        backgroundColor="#7e83e3"
-                        barStyle="light-content"
-                    />
-
                     <View
                         style={{
                             backgroundColor: "#7e83e3",
@@ -66,6 +65,7 @@ class Home extends Component {
                             alignItems: 'center',
                             width: theme.screenWidth,
                             justifyContent: 'center',
+                            paddingTop: Platform.OS === 'android' ? 0 : pxToDp(30),
                         }}
                     >
                         <Text
@@ -85,7 +85,10 @@ class Home extends Component {
                         <RefreshControl
                             refreshing={loading}
                             onRefresh={this._onRefresh.bind(this)}
+                            colors={['#7e83e3']}
+                            title="拼命加载中..."
                         />
+
                     }
                 >
                     {((hasData && meiziData.length > 0) ?
@@ -100,6 +103,7 @@ class Home extends Component {
                                     {/*列表*/}
                                     <SectionListForHome
                                         dataSource={dataSource}
+                                        navigation={this.props.navigation}
                                     />
                                 </View>
 
@@ -166,7 +170,7 @@ const styles = StyleSheet.create({
         marginRight: pxToDp(40),
         fontWeight: 'bold'
     },
-})
+});
 
 const mapStateToProps = (state) => {
     return {
@@ -175,7 +179,7 @@ const mapStateToProps = (state) => {
         dataSource: state.HomeReducer.dataSource,
         meiziData: state.HomeReducer.meiziData,
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
