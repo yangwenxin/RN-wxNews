@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import {Image, Platform} from "react-native";
+import {Image, Platform, TouchableOpacity, View, StyleSheet} from "react-native";
 
 import Home from "../ui/Home";
 import {TabNavigator} from "react-navigation";
@@ -11,57 +11,14 @@ import Find from "../ui/Discovery";
 import Collect from "../ui/Collect";
 import More from "../ui/More";
 import {pxToDp} from "../utils/ScreenUtil";
+import WebView from "../ui/WebView";
 
 const HomeIcon = require('../images/home.png');
 const FindIcon = require('../images/find.png');
 const MoreIcon = require('../images/more.png');
 const CollectIcon = require('../images/collect.png');
-
-//配置底部导航和title
-const TabOptions = (tabBarTitle, icon, navTitle) => {
-    const header = null;
-    // console.log(navigation);
-    const tabBarLabel = tabBarTitle;
-    const tabBarIcon = (({tintColor, focused}) => {
-        return (
-            <Image
-                source={icon}
-                style={[{
-                    height: pxToDp(45),
-                    width: pxToDp(45),
-                    marginBottom: Platform.OS === 'android' ?pxToDp(12):pxToDp(10),
-                }, {
-                    tintColor: tintColor
-                }
-                ]}
-            />
-        )
-    });
-
-    const headerTitleStyle = {
-        color: 'white',
-        fontWeight: 'normal',
-        alignSelf: 'center',
-        headerBackTitle: null,
-        fontSize: pxToDp(30),
-    };
-
-    const headerTitle = navTitle;
-
-    // header的style
-    const headerStyle = {
-        backgroundColor: '#7e83e3',
-        height: Platform.OS === 'android' ? pxToDp(90) : pxToDp(110),
-    };
-    const tabBarVisible = true;
-
-
-    if (navTitle == null) {
-        return {tabBarLabel, tabBarIcon, headerTitle, headerTitleStyle, headerStyle, tabBarVisible, header};
-    }
-    return {tabBarLabel, tabBarIcon, headerTitle, headerTitleStyle, headerStyle, tabBarVisible};
-
-};
+const androidHeaderHeight = pxToDp(90);
+const iosHeaderHeight = pxToDp(110);
 
 
 //创建底部导航
@@ -131,11 +88,86 @@ const MyTab = new TabNavigator({
     }
 )
 
+
 export default {
 
     MyTab: {
         screen: MyTab,
     },
 
+    webView: {
+        screen: WebView,
+        navigationOptions: ({navigation}) => navigationOptions(navigation, '详细内容'),
+    }
 }
+
+//配置底部导航和title
+const TabOptions = (tabBarTitle, icon, navTitle) => {
+    const header = null;
+    // console.log(navigation);
+    const tabBarLabel = tabBarTitle;
+    const tabBarIcon = (({tintColor, focused}) => {
+        return (
+            <Image
+                source={icon}
+                style={[{
+                    height: pxToDp(45),
+                    width: pxToDp(45),
+                    marginBottom: Platform.OS === 'android' ? pxToDp(12) : pxToDp(10),
+                }, {
+                    tintColor: tintColor
+                }
+                ]}
+            />
+        )
+    });
+
+    const headerTitleStyle = {
+        color: 'white',
+        fontWeight: 'normal',
+        alignSelf: 'center',
+        headerBackTitle: null,
+        fontSize: pxToDp(30),
+    };
+
+    const headerTitle = navTitle;
+
+    // header的style
+    const headerStyle = {
+        backgroundColor: '#7e83e3',
+        height: Platform.OS === 'android' ? androidHeaderHeight : iosHeaderHeight,
+    };
+    const tabBarVisible = true;
+    if (navTitle == null) {
+        return {tabBarLabel, tabBarIcon, headerTitle, headerTitleStyle, headerStyle, tabBarVisible, header};
+    }
+    return {tabBarLabel, tabBarIcon, headerTitle, headerTitleStyle, headerStyle, tabBarVisible};
+
+};
+
+
+const navigationOptions = (navigation, title) => {
+
+    const headerTitle = title ? title : '';
+    const headerStyle = styles.headerStyle;
+    const headerTitleStyle = {
+        color: 'white',
+        fontWeight: 'normal',
+        alignSelf: 'center',
+    };
+    const headerRight = <View/>;
+    const headerTintColor = 'white';
+
+    return {headerTitle, headerTitleStyle, headerRight, headerStyle,headerTintColor};
+}
+
+
+const styles = StyleSheet.create({
+    headerStyle: {
+        backgroundColor: '#7e83e3',
+        height: Platform.OS === 'ios' ? iosHeaderHeight : androidHeaderHeight,
+        borderColor: '#EBEBEB',
+    }
+})
+
 

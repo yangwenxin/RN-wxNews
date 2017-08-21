@@ -6,7 +6,10 @@ import {
     Text,
     View,
     SectionList,
-    StyleSheet, TouchableHighlight,
+    StyleSheet,
+    TouchableHighlight,
+    TouchableNativeFeedback,
+    Platform
 } from 'react-native';
 import {pxToDp} from "../utils/ScreenUtil";
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -17,6 +20,7 @@ export default class SectionListForHome extends Component {
 
     static propTypes = {
         dataSource: PropTypes.object,
+        navigation: PropTypes.object,
     };
 
     constructor(props) {
@@ -34,12 +38,10 @@ export default class SectionListForHome extends Component {
     render() {
 
         let dataSource = this.props.dataSource;
-        console.log('dataSource', dataSource);
+
         let sections = Object.keys(dataSource).map(key => {
             return dataSource[key];
         });
-
-        console.log('sections', sections);
 
         return (
             <SectionList
@@ -54,24 +56,46 @@ export default class SectionListForHome extends Component {
     }
 
     _renderListItem = ({item}) => {
+        if (Platform.OS === 'android') {
+            return (
+                <TouchableNativeFeedback
+                    onPress={() => {
+                        this._btnClick(item)
+                    }}
+                >
+                    {this._renderRowContent(item)}
+                </TouchableNativeFeedback>
+            );
+        } else if (Platform.OS === 'ios') {
+            return (
+                <TouchableHighlight
+                    style={styles.btn}
+                    onPress={() => {
+                        this._btnClick(item)
+                    }}
+                    underlayColor="#ccc"
+                >
+                    {this._renderRowContent(item)}
+                </TouchableHighlight>
+            )
+        }
+    }
+
+    _btnClick(item) {
+        this.props.navigation.navigate('webView', {data: item});
+    }
+
+    _renderRowContent(item) {
         return (
-            <TouchableHighlight
-                style={{
-                    justifyContent: 'center',
-                    paddingBottom: pxToDp(30),
-                    paddingLeft: pxToDp(30),
-                    paddingRight: pxToDp(30),
-                    backgroundColor: '#fff',
-                }}
+            <View
+                style={styles.btn}
             >
-                <View>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <Icon name="ios-create-outline" color={'#aaa'}/>
-                        <Text style={{fontSize: pxToDp(25), color: '#aaa'}}> {item.who ? item.who : 'null'}</Text>
-                    </View>
-                    <Text style={{color: '#000', fontSize: pxToDp(30),}} numberOfLines={2}>{item.desc}</Text>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon name="ios-create-outline" color={'#aaa'}/>
+                    <Text style={{fontSize: pxToDp(25), color: '#aaa'}}> {item.who ? item.who : 'null'}</Text>
                 </View>
-            </TouchableHighlight>
+                <Text style={{color: '#000', fontSize: pxToDp(30),}} numberOfLines={2}>{item.desc}</Text>
+            </View>
         )
 
     }
@@ -104,7 +128,6 @@ export default class SectionListForHome extends Component {
                         color: 'steelblue',
                         fontSize: pxToDp(40),
                         marginLeft: pxToDp(20),
-
                     }}
 
                 >{section.key}</Text>
@@ -145,4 +168,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: '#fff'
     },
+    btn: {
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+        padding: pxToDp(30),
+    }
 })

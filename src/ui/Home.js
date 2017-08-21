@@ -14,9 +14,8 @@ import {
     Platform
 } from 'react-native';
 import {pxToDp} from "../utils/ScreenUtil";
-import Toast from "../utils/Toast";
 import theme from "../constants/theme";
-import {getCurrentDate, getYesterdayFromDate} from "../utils/DateUtils";
+import {getCurrentDate} from "../utils/DateUtils";
 import * as Actions from "../redux/actions/requestHomeData";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
@@ -86,7 +85,10 @@ class Home extends Component {
                         <RefreshControl
                             refreshing={loading}
                             onRefresh={this._onRefresh.bind(this)}
+                            colors={['#7e83e3']}
+                            title="拼命加载中..."
                         />
+
                     }
                 >
                     {((hasData && meiziData.length > 0) ?
@@ -101,6 +103,7 @@ class Home extends Component {
                                     {/*列表*/}
                                     <SectionListForHome
                                         dataSource={dataSource}
+                                        navigation={this.props.navigation}
                                     />
                                 </View>
 
