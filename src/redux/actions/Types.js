@@ -12,3 +12,14 @@ export const FETCH_HOME_DATA_FAILURE = 'FETCH_HOME_DATA_FAILURE';
 /**
  *                  home end
  */
+
+/**
+ *                  favor start
+ */
+export const STAR_SUCCESS = 'STAR_SUCCESS';
+export const UNSTAR_SUCCESS = 'UNSTAR_SUCCESS';
+export const UPDATE_STAR = 'UPDATE_STAR';
+export const UPDATE_STAR_DATA = 'UPDATE_STAR_DATA';
+/**
+ *                  favor end
+ */

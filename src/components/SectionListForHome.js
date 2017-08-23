@@ -30,7 +30,6 @@ export default class SectionListForHome extends Component {
     }
 
 
-    //界面渲染完回调该方法
     componentDidMount() {
 
     }
@@ -45,11 +44,10 @@ export default class SectionListForHome extends Component {
 
         return (
             <SectionList
-                sections={sections}//设置数据源
-                renderItem={this._renderListItem}//渲染条目
+                sections={sections}
+                renderItem={this._renderListItem}
                 renderSectionHeader={this._renderSectionHeader}
                 keyExtractor={item => item.url}
-                onEndReachedThreshold={0.5}//
             />
         )
 

@@ -6,7 +6,7 @@ import {Provider}from 'react-redux';
 import configureStore from './redux/store/ConfigureStore';
 
 // 调用 store 文件中的rootReducer常量中保存的方法
-const store = configureStore();
+export const store = configureStore();
 
 import App from './App';
 
@@ -16,9 +16,7 @@ import App from './App';
 
 export default class Root extends Component {
     render() {
-
         // console.disableYellowBox = true;//关闭黄色警告
-
         return (
             // 包装App
             <Provider store={store}>

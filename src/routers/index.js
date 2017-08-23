@@ -11,7 +11,7 @@ import Find from "../ui/Discovery";
 import Collect from "../ui/Collect";
 import More from "../ui/More";
 import {pxToDp} from "../utils/ScreenUtil";
-import WebView from "../ui/WebView";
+import WebViewPage from "../ui/WebViewPage";
 
 const HomeIcon = require('../images/home.png');
 const FindIcon = require('../images/find.png');
@@ -96,7 +96,7 @@ export default {
     },
 
     webView: {
-        screen: WebView,
+        screen: WebViewPage,
         navigationOptions: ({navigation}) => navigationOptions(navigation, '详细内容'),
     }
 }

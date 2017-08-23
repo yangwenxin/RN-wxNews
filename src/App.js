@@ -6,8 +6,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {addNavigationHelpers, StackNavigator, NavigationActions} from 'react-navigation';
 import routers from './routers';
+import * as Root from './index';
 import {BackAndroid} from 'react-native'
-
+import {fetchStarList} from "./redux/actions/favorData";
 export const AppNavigator = StackNavigator(routers, {});
 
 class App extends React.Component {
@@ -15,6 +16,7 @@ class App extends React.Component {
     //全局监听Android返回按键，统一处理
     componentDidMount() {
         BackAndroid.addEventListener('hardwareBackPress', this.onBackPress);
+        Root.store.dispatch(fetchStarList());
     }
 
     componentWillUnmount() {

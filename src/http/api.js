@@ -9,7 +9,6 @@ export const getCommonData = (type, page) => {
 }
 
 export const getDaily = (date) => {
-    console.log('请求时间', date);
     return request(`day/${date}`, {});
 }
 
