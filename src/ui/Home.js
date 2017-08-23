@@ -32,7 +32,6 @@ class Home extends Component {
         this.imageHeight = pxToDp(900);
     }
 
-    //界面渲染完回调该方法
     componentDidMount() {
         this.fetchData();
     }

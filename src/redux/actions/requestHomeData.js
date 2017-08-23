@@ -44,16 +44,15 @@ function handleData(res, keys) {
             return data[key];
         });
         list.map(item => {
-            //遍历data数据 通过item.date获取section
             item.map(childItem => {
                 if (childItem.type !== '福利') {
+
                     let section = keys[childItem.type];
+
                     if (!section) {
-                        //获取section不存在，创建一个section存入keys， key为date
                         section = {data: [], key: childItem.type};
                         keys[childItem.type] = section;
                     }
-                    //section.data添加任务数据
                     section.data.push(childItem);
                 }
             })
@@ -71,7 +70,6 @@ export function fetchHomeData(date) {
             } else {
                 dispatch(fetchHomeData(getYesterdayFromDate(date)));
             }
-
         })
             .catch(error => {
                 dispatch(requestFailure());

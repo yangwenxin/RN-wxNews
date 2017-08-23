@@ -12,18 +12,14 @@ import thunk from 'redux-thunk';
 // redux-logger打印logger的中间件
 import logger from 'redux-logger';
 
-
-// rootReducer下一步会创建
 import RootReducer from "../reducer/RootReducer";
 
 let middlewares = [];
-middlewares.push(logger);
 middlewares.push(thunk);
 
 // 通过applyMiddleware将中间件添加
 const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 
-// 导出configureStore，里面携带着reducer，中间件，初始值
-export default function configureStore(initialState) {
-    return createStoreWithMiddleware(RootReducer, initialState);
+export default function configureStore() {
+    return createStoreWithMiddleware(RootReducer);
 }

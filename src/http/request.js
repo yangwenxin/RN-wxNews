@@ -35,7 +35,7 @@ export default async (url, config) => {
     }
 
     //请求 返回数据
-    return fetch(url, requestConfig)
+    return timeout(5000, fetch(url, requestConfig))
         .then(response => response.json())
         .then(res => {
             if (!res.error) {
@@ -47,4 +47,13 @@ export default async (url, config) => {
             console.log('请求失败' + err);
         })
 };
+
+function timeout(ms, promise) {
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            reject(new Error("timeout"))
+        }, ms);
+        promise.then(resolve, reject);
+    })
+}
 
