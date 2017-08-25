@@ -47,9 +47,10 @@ const MyTab = new TabNavigator({
         }
     },
     {
+
         tabBarPosition: 'bottom',
         swipeEnabled: false,
-        animationEnabled: false,
+        animationEnabled: true,
         backBehavior: 'none',
         tabBarOptions: {
             // tabbar上label的style

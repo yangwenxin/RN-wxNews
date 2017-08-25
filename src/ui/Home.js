@@ -53,13 +53,13 @@ class Home extends Component {
         return (
             <View style={styles.container}>
                 <StatusBar
-                    backgroundColor="#7e83e3"
+                    backgroundColor={theme.themeColor}
                     barStyle="light-content"
                 />
                 <Animated.View style={[styles.toolbar, {opacity: opacity}]}>
                     <View
                         style={{
-                            backgroundColor: "#7e83e3",
+                            backgroundColor: theme.themeColor,
                             height: theme.toolbar.height,
                             alignItems: 'center',
                             width: theme.screenWidth,
@@ -77,14 +77,14 @@ class Home extends Component {
                 <ScrollView
                     scrollEnabled={this.state.scrollEnabled}
                     onScroll={Animated.event(
-                        [{ nativeEvent: { contentOffset: { y: this.state.scrollDist } } }]
+                        [{nativeEvent: {contentOffset: {y: this.state.scrollDist}}}]
                     )}
                     refreshControl={
 
                         <RefreshControl
                             refreshing={loading}
                             onRefresh={this._onRefresh.bind(this)}
-                            colors={['#7e83e3']}
+                            colors={[theme.themeColor]}
                             title="拼命加载中..."
                         />
 

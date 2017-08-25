@@ -29,15 +29,8 @@ export default class SectionListForHome extends Component {
         this.tabColor = ['rgb(141,192,89)', '#000', 'rgb(51,154,237)', '#9370db', '#00ced1', 'rgb(249,89,58)', '#ffa500'];
     }
 
-
-    componentDidMount() {
-
-    }
-
     render() {
-
         let dataSource = this.props.dataSource;
-
         let sections = Object.keys(dataSource).map(key => {
             return dataSource[key];
         });
@@ -50,7 +43,6 @@ export default class SectionListForHome extends Component {
                 keyExtractor={item => item.url}
             />
         )
-
     }
 
     _renderListItem = ({item}) => {
@@ -130,11 +122,8 @@ export default class SectionListForHome extends Component {
 
                 >{section.key}</Text>
             </View>
-
         )
-
     }
-
 
     _judgeIconAttribute(hearderLabel) {
         switch (hearderLabel) {

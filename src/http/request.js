@@ -25,13 +25,12 @@ export default async (url, config) => {
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
         };
         requestConfig.body = searchParams;
-        // console.log('POST请求url = ' + url + '-请求参数 = ' + requestConfig.body);
+        console.log('POST请求url = ' + url + '-请求参数 = ' + requestConfig.body);
     }
 
     if (requestConfig.method === 'GET') {
         url = `${url}?${searchParams}`;
-
-        // console.log('GET请求url = ' + url);
+        console.log('GET请求url = ' + url);
     }
 
     //请求 返回数据
