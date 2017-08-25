@@ -1,14 +1,20 @@
+/**
+ * Created by wenxin on 2017/8/4.
+ */
 import React, {Component} from 'react';
 import {
     Text,
     View
 } from 'react-native';
-
-/**
- * Created by wenxin on 2017/8/4.
- */
+import theme from "../constants/theme";
 
 export default class Discovery extends Component {
+
+    static navigationOptions = {
+        headerStyle: {
+            backgroundColor: '#333',
+        }
+    };
 
     constructor(props) {
         super(props);

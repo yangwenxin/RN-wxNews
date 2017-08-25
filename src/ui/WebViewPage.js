@@ -26,7 +26,6 @@ class WebViewPage extends Component {
         ];
         this.bottomIconSize = [pxToDp(50), pxToDp(50), pxToDp(64)];
         this.dataSource = this.props.navigation.state.params.data;
-        console.log('dataID',this.dataSource._id);
     }
 
     componentDidMount() {
