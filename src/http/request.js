@@ -1,4 +1,3 @@
-import Toast from "../utils/Toast";
 export default async (url, config) => {
 
     //拼接url
@@ -38,8 +37,6 @@ export default async (url, config) => {
         .then(response => response.json())
         .then(res => {
             if (!res.error) {
-                // console.log('获取数据', res.results);
-                // console.log('获取数据', res.category);
                 return res;
             }
         }).catch(err => {
