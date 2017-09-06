@@ -12,11 +12,10 @@ export default class More extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+
     }
 
 
-    //界面渲染完回调该方法
     componentDidMount() {
 
     }

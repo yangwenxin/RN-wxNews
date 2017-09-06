@@ -36,7 +36,7 @@ class Home extends Component {
         this.fetchData();
     }
 
-    async fetchData() {
+    fetchData() {
         this.props.actions.fetchHomeData(getCurrentDate());
         this.props.actions.fetchMeiZiData();
     }
@@ -53,41 +53,32 @@ class Home extends Component {
         return (
             <View style={styles.container}>
                 <StatusBar
-                    backgroundColor={theme.themeColor}
+                    backgroundColor={theme.mainColor}
                     barStyle="light-content"
                 />
-                <Animated.View style={[styles.toolbar, {opacity: opacity}]}>
+
+                <Animated.View style={[styles.animated, {opacity: opacity}]}>
                     <View
-                        style={{
-                            backgroundColor: theme.themeColor,
-                            height: theme.toolbar.height,
-                            alignItems: 'center',
-                            width: theme.screenWidth,
-                            justifyContent: 'center',
-                            paddingTop: Platform.OS === 'android' ? 0 : pxToDp(30),
-                        }}
+                        style={styles.toolbar}
                     >
                         <Text
-                            style={{color: 'white', fontSize: pxToDp(30),}}
+                            style={{color: 'white', fontSize: pxToDp(30)}}
                         >最新干货</Text>
                     </View>
 
                 </Animated.View>
 
                 <ScrollView
-                    scrollEnabled={this.state.scrollEnabled}
                     onScroll={Animated.event(
                         [{nativeEvent: {contentOffset: {y: this.state.scrollDist}}}]
                     )}
                     refreshControl={
-
                         <RefreshControl
                             refreshing={loading}
                             onRefresh={this._onRefresh.bind(this)}
-                            colors={[theme.themeColor]}
+                            colors={[theme.mainColor]}
                             title="拼命加载中..."
                         />
-
                     }
                 >
                     {((hasData && meiziData.length > 0) ?
@@ -144,10 +135,19 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     toolbar: {
+        backgroundColor: theme.mainColor,
+        height: theme.toolbar.height,
+        alignItems: 'center',
+        width: theme.screenWidth,
+        justifyContent: 'center',
+        paddingTop: Platform.OS === 'android' ? 0 : pxToDp(30),
+    },
+    animated:{
         position: 'absolute',
         zIndex: 1,
         width: theme.screenWidth,
     },
+
     img: {
         width: theme.screenWidth,
         height: pxToDp(900),

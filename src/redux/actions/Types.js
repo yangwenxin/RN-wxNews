@@ -23,3 +23,14 @@ export const UPDATE_STAR_DATA = 'UPDATE_STAR_DATA';
 /**
  *                  favor end
  */
+
+/**
+ *                  duscivert start
+ */
+export const DUSCIVERT_MORE_DATA_SUCCESS = 'DUSCIVERT_MORE_DATA_SUCCESS';
+export const DUSCIVERT_DATA_SUCCESS = 'DUSCIVERT_DATA_SUCCESS';
+export const DUSCIVERT_MORE_REQUEST = 'DUSCIVERT_MORE_REQUEST';
+export const DUSCIVERT_DATA_REQUEST = 'DUSCIVERT_DATA_REQUEST';
+/**
+ *                  duscivert end
+ */

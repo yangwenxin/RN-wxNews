@@ -95,19 +95,10 @@ export default class SectionListForHome extends Component {
         return (
 
             <View
-                style={styles.section_header}
+                style={styles.section_container}
             >
-
                 <View
-                    style={{
-                        width: width,
-                        height: width,
-                        borderRadius: width / 2,
-                        backgroundColor: this.tabColor[this._judgeIconAttribute(section.key)],
-                        alignItems: 'center',
-                        justifyContent: 'center',
-
-                    }}
+                    style={[styles.section_header, {backgroundColor: this.tabColor[this._judgeIconAttribute(section.key)]}]}
                 >
                     <Icon name={this.tabIcon[this._judgeIconAttribute(section.key)]} color="#fff" size={width / 2}/>
 
@@ -150,14 +141,22 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     section_header: {
-        padding: pxToDp(30),
+        width: pxToDp(50),
+        height: pxToDp(50),
+        borderRadius: pxToDp(50) / 2,
         alignItems: 'center',
-        flexDirection: 'row',
-        backgroundColor: '#fff'
+        justifyContent: 'center',
     },
     btn: {
         justifyContent: 'center',
         backgroundColor: '#fff',
+        padding:Platform.OS === 'android'? pxToDp(30): pxToDp(15),
+    },
+    section_container: {
         padding: pxToDp(30),
+        alignItems: 'center',
+        flexDirection: 'row',
+        backgroundColor: '#fff'
     }
+
 })
