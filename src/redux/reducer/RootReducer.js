@@ -7,12 +7,13 @@ import nav from './nav';
 import HomeReducer from "./HomeReducer";
 import favorReducer from "./favorReducer";
 import RandomReducer from "./RandomReducer";
+import CommonDataReducer from "./CommonDataReducer";
 
 const RootReducer = combineReducers({
     nav,
     HomeReducer,
     favorReducer,
     RandomReducer,
-
+    CommonDataReducer,
 });
 export default RootReducer;

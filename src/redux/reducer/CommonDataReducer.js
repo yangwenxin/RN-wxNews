@@ -1,5 +1,5 @@
 /**
- * Created by wenxin on 2017/8/17.
+ * Created by wenxin on 2017/9/6.
  */
 import React, {Component} from 'react';
 import * as types from "../actions/Types";
@@ -9,32 +9,36 @@ const initialState = {
     loading: true,
     dataSource: [],
     isRenderFooter: false,
+    isError: false,
+    page: 1,
 };
 
-export default function RandomReducer(state = initialState, action) {
+export default function CommonDataReducer(state = initialState, action) {
 
     switch (action.type) {
 
-        case types.DUSCIVERT_DATA_SUCCESS: {
+        case types.COMMON_DATA_SUCCESS: {
             return Object.assign({}, state, {
                 ...state,
                 loading: false,
                 isRenderFooter: false,
                 dataSource: action.dataSource,
+                page: 2,
             });
         }
 
-        case types.DUSCIVERT_MORE_DATA_SUCCESS: {
+        case types.COMMON_MORE_DATA_SUCCESS: {
             console.log('concat(action.dataSource)', state.dataSource.concat(action.dataSource));
             return Object.assign({}, state, {
                 ...state,
                 loading: false,
                 isRenderFooter: false,
                 dataSource: state.dataSource.concat(action.dataSource),
+                page: ++state.page,
             })
         }
 
-        case types.DUSCIVERT_MORE_REQUEST: {
+        case types.COMMON_MORE_REQUEST: {
             return Object.assign({}, state, {
                 ...state,
                 loading: false,
@@ -42,7 +46,7 @@ export default function RandomReducer(state = initialState, action) {
             })
         }
 
-        case types.DUSCIVERT_DATA_REQUEST: {
+        case types.COMMON_DATA_REQUEST: {
             return Object.assign({}, state, {
                 ...state,
                 loading: true,
@@ -50,11 +54,14 @@ export default function RandomReducer(state = initialState, action) {
             })
         }
 
-        case types.DUSCIVERT_DATA_FAILURE: {
+        case types.COMMON_DATA_FAILURE: {
             return Object.assign({}, state, {
                 ...state,
                 loading: false,
                 isRenderFooter: false,
+                isError: true,
+                page: 1,
+                dataSource: [],
             })
         }
 

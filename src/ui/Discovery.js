@@ -87,8 +87,8 @@ class Discovery extends Component {
                     </View>
                 </View>
                 <View style={styles.imgPart}>
-                    {(rowData.images)?
-                        <Image style={styles.image} source={{uri: getCorrectImageSizeUrl(rowData.images[0])}} />
+                    {(rowData.images) ?
+                        <Image style={styles.image} source={{uri: getCorrectImageSizeUrl(rowData.images[0])}}/>
                         :
                         <Image style={[styles.image]} source={require('../images/user_article_no_data.png')}/>
                     }
@@ -101,11 +101,9 @@ class Discovery extends Component {
     _tabOnPress(data) {
 
         if (data.title !== '福利') {
-
-
+            this.props.navigation.navigate('commonPage', {title: data.title});
             return;
         }
-
 
     }
 
@@ -160,7 +158,6 @@ class Discovery extends Component {
                     />
                     <Text style={{marginLeft: pxToDp(20)}}>拼命获取中...</Text>
                 </View>
-
             )
         } else {
             return null;
@@ -184,30 +181,27 @@ class Discovery extends Component {
     render() {
         let {loading, dataSource, isRenderFooter} = this.props;
         return (
-
-            <View style={{flex: 1}}>
-                <ListView
-                    enableEmptySections={true}
-                    renderFooter={this._footer}
-                    renderHeader={this._header}
-                    renderSeparator={this._separator}
-                    renderRow={this._renderItem}
-                    dataSource={this.ds.cloneWithRows(dataSource)}
-                    initialListSize={10}
-                    pageSize={10}
-                    onEndReachedThreshold={0.1}
-                    onEndReached={this._loadMore}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={loading}
-                            onRefresh={this._onRefresh}
-                            colors={[theme.mainColor]}
-                            title="拼命加载中..."
-                        />
-                    }
-                >
-                </ListView>
-            </View>
+            <ListView
+                enableEmptySections={true}
+                renderFooter={this._footer}
+                renderHeader={this._header}
+                renderSeparator={this._separator}
+                renderRow={this._renderItem}
+                dataSource={this.ds.cloneWithRows(dataSource)}
+                initialListSize={10}
+                pageSize={10}
+                onEndReachedThreshold={0.5}
+                onEndReached={this._loadMore}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={loading}
+                        onRefresh={this._onRefresh}
+                        colors={[theme.mainColor]}
+                        title="拼命加载中..."
+                    />
+                }
+            >
+            </ListView>
         );
     }
 
@@ -299,7 +293,7 @@ const styles = StyleSheet.create({
         height: pxToDp(152),
         padding: pxToDp(22),
         backgroundColor: '#fff',
-        flex:80,
+        flex: 80,
     },
     itemHeader: {
         height: pxToDp(80),
@@ -344,7 +338,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingRight: pxToDp(12),
-        backgroundColor:'#fff'
+        backgroundColor: '#fff'
     },
     image: {
         width: pxToDp(125),

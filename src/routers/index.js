@@ -12,6 +12,7 @@ import Collect from "../ui/Collect";
 import More from "../ui/More";
 import {pxToDp} from "../utils/ScreenUtil";
 import WebViewPage from "../ui/WebViewPage";
+import CommonDataPage from "../ui/CommonDataPage";
 
 const HomeIcon = require('../images/home.png');
 const FindIcon = require('../images/find.png');
@@ -99,6 +100,11 @@ export default {
     webView: {
         screen: WebViewPage,
         navigationOptions: ({navigation}) => navigationOptions(navigation, '详细内容'),
+    },
+
+    commonPage: {
+        screen: CommonDataPage,
+        navigationOptions: ({navigation}) => navigationOptions(navigation, '精品干货'),
     }
 }
 
@@ -159,7 +165,7 @@ const navigationOptions = (navigation, title) => {
     const headerRight = <View/>;
     const headerTintColor = 'white';
 
-    return {headerTitle, headerTitleStyle, headerRight, headerStyle,headerTintColor};
+    return {headerTitle, headerTitleStyle, headerRight, headerStyle, headerTintColor};
 }
 
 

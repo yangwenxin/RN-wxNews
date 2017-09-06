@@ -20,6 +20,12 @@ function fetchSuccess(dataSource) {
     };
 }
 
+function fetchFailure() {
+    return {
+        type: types.DUSCIVERT_DATA_FAILURE,
+    };
+}
+
 function handlerData(dataSource) {
 
     dataSource.map((item, index) => {
@@ -66,10 +72,10 @@ export function fetchRandomData(isMoreData = false) {
 
             })
             .catch((err) => {
-                Toast("获取数据失败" + {err});
+                Toast("获取数据失败");
                 console.log('err', err);
+                dispatch(fetchFailure());
             })
-
     }
 
     return (dispatch) => {
