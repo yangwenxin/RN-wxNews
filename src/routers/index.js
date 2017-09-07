@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import {Image, Platform, TouchableOpacity, View, StyleSheet} from "react-native";
+import {Image, Platform, TouchableOpacity, View, StyleSheet, Button} from "react-native";
 
 import Home from "../ui/Home";
 import {TabNavigator} from "react-navigation";
@@ -13,6 +13,7 @@ import More from "../ui/More";
 import {pxToDp} from "../utils/ScreenUtil";
 import WebViewPage from "../ui/WebViewPage";
 import CommonDataPage from "../ui/CommonDataPage";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const HomeIcon = require('../images/home.png');
 const FindIcon = require('../images/find.png');
@@ -162,10 +163,32 @@ const navigationOptions = (navigation, title) => {
         fontWeight: 'normal',
         alignSelf: 'center',
     };
+    const headerBackTitle = false;
     const headerRight = <View/>;
     const headerTintColor = 'white';
 
-    return {headerTitle, headerTitleStyle, headerRight, headerStyle, headerTintColor};
+
+    const headerLeft = <TouchableOpacity
+        onPress={() => {
+            navigation.goBack();//返回上一页
+        }}
+    >
+        <View style={styles.headerLeft}>
+            <Icon
+                name='ios-arrow-back'
+                size={pxToDp(50)}
+                color='white'
+            />
+        </View>
+
+    </TouchableOpacity>;
+
+    if (Platform.OS === 'android') {
+        return {headerTitle, headerTitleStyle, headerRight, headerStyle, headerTintColor};
+    } else {
+        return {headerTitle, headerTitleStyle, headerRight, headerStyle, headerTintColor, headerBackTitle, headerLeft};
+    }
+
 }
 
 
@@ -174,7 +197,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#7e83e3',
         height: Platform.OS === 'ios' ? iosHeaderHeight : androidHeaderHeight,
         borderColor: '#EBEBEB',
-    }
+    },
+    headerLeft: {
+        borderColor: '#EBEBEB',
+        height: iosHeaderHeight,
+        justifyContent: 'center',
+        paddingLeft: pxToDp(40),
+        paddingRight: pxToDp(100),
+    },
 })
 
 
