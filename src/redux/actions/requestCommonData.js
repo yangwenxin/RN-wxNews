@@ -37,6 +37,18 @@ function fetchMoreRequest() {
     };
 }
 
+function resume() {
+    return {
+        type: types.STATE_RESUME
+    };
+}
+
+export function stateResume() {
+    return (dispatch) => {
+        dispatch(resume());
+    }
+}
+
 export function fetchCommonData(isMoreData, title, page) {
 
     if (page > 10) {
@@ -68,4 +80,5 @@ export function fetchCommonData(isMoreData, title, page) {
     }
 
 }
+
 

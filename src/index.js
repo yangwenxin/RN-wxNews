@@ -16,7 +16,7 @@ import App from './App';
 
 export default class Root extends Component {
     render() {
-        // console.disableYellowBox = true;//关闭黄色警告
+        console.disableYellowBox = true;//关闭黄色警告
         return (
             // 包装App
             <Provider store={store}>

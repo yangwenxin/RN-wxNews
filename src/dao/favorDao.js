@@ -26,7 +26,6 @@ export default class FavorDao {
             AsyncStorage.getItem(FAVOR_DATA, (error, result) => {
                 if (!error) {
                     const list = JSON.parse(result);
-                    console.log('list', list);
                     if (list) {
                         resolve(list);
                     } else {

@@ -59,7 +59,6 @@ export default class SectionListForHome extends Component {
         } else if (Platform.OS === 'ios') {
             return (
                 <TouchableHighlight
-                    style={styles.btn}
                     onPress={() => {
                         this._btnClick(item)
                     }}
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
     btn: {
         justifyContent: 'center',
         backgroundColor: '#fff',
-        padding:Platform.OS === 'android'? pxToDp(30): pxToDp(15),
+        padding:pxToDp(30),
     },
     section_container: {
         padding: pxToDp(30),

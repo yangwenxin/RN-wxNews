@@ -86,7 +86,7 @@ export function unStarData(data) {
         for (let i in dataSource) {
             if (dataSource[i]._id === data._id) {
                 dataSource.splice(i, 1);
-                dao.save(data).then((msg) => {
+                dao.save(dataSource).then((msg) => {
                     dispatch(unStarSuccess(dataSource));
                     dispatch(updateStarState(false));
                     //Toast.show(msg, {position: -80});
