@@ -44,6 +44,7 @@ export const COMMON_DATA_SUCCESS = 'COMMON_DATA_SUCCESS';
 export const COMMON_DATA_FAILURE = 'COMMON_DATA_FAILURE';
 export const COMMON_MORE_REQUEST = 'COMMON_MORE_REQUEST';
 export const COMMON_DATA_REQUEST = 'COMMON_DATA_REQUEST';
+export const STATE_RESUME = 'STATE_RESUME';
 /**
  *                  CommonData end
  */

@@ -6,7 +6,7 @@ import * as types from "../actions/Types";
 
 //定义初始化数据
 const initialState = {
-    loading: true,
+    loading: false,
     dataSource: [],
     isRenderFooter: false,
     isError: false,
@@ -28,7 +28,7 @@ export default function CommonDataReducer(state = initialState, action) {
         }
 
         case types.COMMON_MORE_DATA_SUCCESS: {
-            console.log('concat(action.dataSource)', state.dataSource.concat(action.dataSource));
+
             return Object.assign({}, state, {
                 ...state,
                 loading: false,
@@ -62,6 +62,17 @@ export default function CommonDataReducer(state = initialState, action) {
                 isError: true,
                 page: 1,
                 dataSource: [],
+            })
+        }
+
+        case types.STATE_RESUME: {
+            return Object.assign({}, state, {
+                ...state,
+                loading: false,
+                dataSource: [],
+                isRenderFooter: false,
+                isError: false,
+                page: 1,
             })
         }
 

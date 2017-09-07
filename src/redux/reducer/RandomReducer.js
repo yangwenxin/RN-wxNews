@@ -25,7 +25,7 @@ export default function RandomReducer(state = initialState, action) {
         }
 
         case types.DUSCIVERT_MORE_DATA_SUCCESS: {
-            console.log('concat(action.dataSource)', state.dataSource.concat(action.dataSource));
+
             return Object.assign({}, state, {
                 ...state,
                 loading: false,

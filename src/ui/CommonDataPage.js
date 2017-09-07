@@ -21,10 +21,18 @@ class CommonDataPage extends Component {
     constructor(props) {
         super(props);
         this.title = props.navigation.state.params.title;
+        this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     }
 
     componentDidMount() {
-        this.props.actions.fetchCommonData(false, this.title, this.props.page);
+        setTimeout(() => {
+            this.props.actions.fetchCommonData(false, this.title, this.props.page);
+        }, 1000);
+
+    }
+
+    componentWillUnmount() {
+        this.props.actions.stateResume();
     }
 
     _fethchData() {
@@ -134,7 +142,7 @@ class CommonDataPage extends Component {
                         renderSeparator={this._separator}
                         renderRow={this._renderItem}
                         dataSource={this.ds.cloneWithRows(dataSource)}
-                        initialListSize={10}
+                        initialListSize={20}
                         pageSize={10}
                         onEndReachedThreshold={0.5}
                         onEndReached={this._loadMore}
