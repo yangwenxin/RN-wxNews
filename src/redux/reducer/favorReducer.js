@@ -3,7 +3,9 @@
  */
 import React, {Component} from 'react';
 import * as types from "../actions/Types";
-
+import {
+    DeviceEventEmitter
+} from 'react-native';
 //定义初始化数据
 const initialState = {
     dataSource: [],
@@ -16,6 +18,7 @@ export default function favorReducer(state = initialState, action) {
     switch (action.type) {
 
         case types.STAR_SUCCESS: {
+            DeviceEventEmitter.emit('favorChange');
             return Object.assign({}, state, {
                 ...state,
                 isStarred: true,
@@ -24,7 +27,7 @@ export default function favorReducer(state = initialState, action) {
         }
 
         case types.UNSTAR_SUCCESS: {
-
+            DeviceEventEmitter.emit('favorChange');
             return Object.assign({}, state, {
                 ...state,
                 isStarred: false,
@@ -41,6 +44,7 @@ export default function favorReducer(state = initialState, action) {
         }
 
         case types.UPDATE_STAR_DATA: {
+            DeviceEventEmitter.emit('favorChange');
             return Object.assign({}, state, {
                 ...state,
                 dataSource: action.dataSource,

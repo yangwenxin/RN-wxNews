@@ -5,11 +5,26 @@ import React, {Component} from 'react';
 import {
     Text,
     View,
-    ScrollView
+    ScrollView,
+    DeviceEventEmitter
 } from 'react-native';
 import {connect} from "react-redux";
 import ListViewForCollect from "../components/ListViewForCollect";
 class Collect extends Component {
+
+    componentDidMount() {
+        //收到监听
+        this.listener = DeviceEventEmitter.addListener('favorChange', () => {
+            this.setState({
+                isChange: true,
+            })
+        });
+    }
+
+    componentWillUnmount() {
+        // 移除监听
+        this.listener.remove();
+    }
 
     render() {
 
