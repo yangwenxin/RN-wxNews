@@ -32,8 +32,8 @@ MIT License
 
 ## 下载
 
-- Apk文件在[这里](https://github.com/yangwenxin/RN-wxNews/tree/master/android/app/app-release.apk)
+- Apk文件在[这里](https://github.com/yangwenxin/RN-wxNews/tree/master/android/app)
 
 ## 二维码下载
 
-![](https://github.com/yangwenxin/RN-wxNews/wxNewsDownload.png)
+![](https://github.com/yangwenxin/RN-wxNews/blob/master/wxNewsDownload.png)
