@@ -15,6 +15,8 @@ import WebViewPage from "../ui/WebViewPage";
 import CommonDataPage from "../ui/CommonDataPage";
 import Icon from 'react-native-vector-icons/Ionicons';
 import Meizi from "../ui/Meizi";
+import Disclaimer from "../ui/Disclaimer";
+import Splash from "../ui/Splash";
 
 const HomeIcon = require('../images/home.png');
 const FindIcon = require('../images/find.png');
@@ -22,7 +24,6 @@ const MoreIcon = require('../images/more.png');
 const CollectIcon = require('../images/collect.png');
 const androidHeaderHeight = pxToDp(90);
 const iosHeaderHeight = pxToDp(110);
-
 
 //创建底部导航
 const MyTab = new TabNavigator({
@@ -94,24 +95,28 @@ const MyTab = new TabNavigator({
 
 
 export default {
-
-    MyTab: {
+    splash: {
+        screen: Splash,
+        navigationOptions: ({navigation}) => navigationOptions(navigation, null),
+    },
+    myTab: {
         screen: MyTab,
     },
-
     webView: {
         screen: WebViewPage,
         navigationOptions: ({navigation}) => navigationOptions(navigation, '详细内容'),
     },
-
     commonPage: {
         screen: CommonDataPage,
         navigationOptions: ({navigation}) => navigationOptions(navigation, '精品干货'),
     },
-
     meizi: {
         screen: Meizi,
         navigationOptions: ({navigation}) => navigationOptions(navigation, '小姐姐'),
+    },
+    disclaimer: {
+        screen: Disclaimer,
+        navigationOptions: ({navigation}) => navigationOptions(navigation, '免责声明'),
     }
 }
 
@@ -190,8 +195,25 @@ const navigationOptions = (navigation, title) => {
     </TouchableOpacity>;
 
     if (Platform.OS === 'android') {
+        if (title === null) {
+            const header = null;
+            return {headerTitle, headerTitleStyle, headerRight, headerStyle, headerTintColor, header};
+        }
         return {headerTitle, headerTitleStyle, headerRight, headerStyle, headerTintColor};
     } else {
+        if (title === null) {
+            const header = null;
+            return {
+                headerTitle,
+                headerTitleStyle,
+                headerRight,
+                headerStyle,
+                headerTintColor,
+                headerBackTitle,
+                headerLeft,
+                header
+            };
+        }
         return {headerTitle, headerTitleStyle, headerRight, headerStyle, headerTintColor, headerBackTitle, headerLeft};
     }
 
