@@ -43,7 +43,7 @@ class Home extends Component {
 
     render() {
         let {loading, dataSource, hasData, meiziData} = this.props;
-        let random = Math.round(Math.random() * 99);
+        let random = Math.round(Math.random() * 49);
 
         let opacity = this.state.scrollDist.interpolate({
             inputRange: [0, 400],

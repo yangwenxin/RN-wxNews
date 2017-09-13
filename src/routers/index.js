@@ -14,6 +14,7 @@ import {pxToDp} from "../utils/ScreenUtil";
 import WebViewPage from "../ui/WebViewPage";
 import CommonDataPage from "../ui/CommonDataPage";
 import Icon from 'react-native-vector-icons/Ionicons';
+import Meizi from "../ui/Meizi";
 
 const HomeIcon = require('../images/home.png');
 const FindIcon = require('../images/find.png');
@@ -49,7 +50,7 @@ const MyTab = new TabNavigator({
         }
     },
     {
-
+        lazy: true,
         tabBarPosition: 'bottom',
         swipeEnabled: false,
         animationEnabled: true,
@@ -106,6 +107,11 @@ export default {
     commonPage: {
         screen: CommonDataPage,
         navigationOptions: ({navigation}) => navigationOptions(navigation, '精品干货'),
+    },
+
+    meizi: {
+        screen: Meizi,
+        navigationOptions: ({navigation}) => navigationOptions(navigation, '小姐姐'),
     }
 }
 

@@ -16,9 +16,9 @@ export const getRandom = (url) => {
     return request(`random/data/${url}`, {});
 }
 
-
-export const getMeiziData = (type, page) => {
-    return request(`data/${type}/100/${page}`, {});
+export const getMeiziData = (page) => {
+    return request(`data/福利/51/${page}`, {});
 }
+
 
 
