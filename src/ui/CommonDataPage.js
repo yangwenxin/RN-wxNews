@@ -25,10 +25,7 @@ class CommonDataPage extends Component {
     }
 
     componentDidMount() {
-        setTimeout(() => {
-            this.props.actions.fetchCommonData(false, this.title, this.props.page);
-        }, 1000);
-
+        this.props.actions.fetchCommonData(false, this.title, this.props.page);
     }
 
     componentWillUnmount() {
@@ -81,7 +78,7 @@ class CommonDataPage extends Component {
 
                 <View style={[styles.rowItem]}>
                     <View style={styles.titlePart}>
-                        <Text style={[styles.title]} numberOfLines={2}>{rowData.desc}</Text>
+                        <Text style={styles.title} numberOfLines={2}>{rowData.desc}</Text>
                     </View>
                     <View style={styles.infoPart}>
                         <Icon name="ios-pricetag-outline"/>
@@ -139,7 +136,6 @@ class CommonDataPage extends Component {
                     <ListView
                         enableEmptySections={true}
                         renderFooter={this._footer}
-                        renderSeparator={this._separator}
                         renderRow={this._renderItem}
                         dataSource={this.ds.cloneWithRows(dataSource)}
                         initialListSize={20}
@@ -252,5 +248,8 @@ const styles = StyleSheet.create({
         height: pxToDp(125),
         resizeMode: 'cover'
     },
+    title: {
+        color: '#000',
+    }
 
 });

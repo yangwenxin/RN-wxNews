@@ -48,3 +48,16 @@ export const STATE_RESUME = 'STATE_RESUME';
 /**
  *                  CommonData end
  */
+
+/**
+ *                  meizi start
+ */
+export const MEIZI_MORE_DATA_SUCCESS = 'MEIZI_MORE_DATA_SUCCESS';
+export const MEIZI_DATA_SUCCESS = 'MEIZI_DATA_SUCCESS';
+export const MEIZI_DATA_FAILURE = 'MEIZI_DATA_FAILURE';
+export const MEIZI_MORE_REQUEST = 'MEIZI_MORE_REQUEST';
+export const MEIZI_DATA_REQUEST = 'MEIZI_DATA_REQUEST';
+export const MEIZI_STATE_RESUME = 'MEIZI_STATE_RESUME';
+/**
+ *                  meizi end
+ */

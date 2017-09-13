@@ -45,7 +45,6 @@ class Discovery extends Component {
 
     _renderItem = (rowData, sectionID, rowID) => {
 
-
         if (Platform.OS === 'android') {
             return (
                 <TouchableNativeFeedback
@@ -74,7 +73,7 @@ class Discovery extends Component {
             <View style={styles.itemContainer}>
                 <View style={[styles.rowItem]}>
                     <View style={styles.titlePart}>
-                        <Text style={[styles.title]} numberOfLines={2}>{rowData.desc}</Text>
+                        <Text style={styles.title} numberOfLines={2}>{rowData.desc}</Text>
                     </View>
                     <View style={styles.infoPart}>
                         <Icon name="ios-pricetag-outline"/>
@@ -104,6 +103,8 @@ class Discovery extends Component {
             this.props.navigation.navigate('commonPage', {title: data.title});
             return;
         }
+
+        this.props.navigation.navigate('meizi');
 
     }
 
@@ -345,5 +346,7 @@ const styles = StyleSheet.create({
         height: pxToDp(125),
         resizeMode: 'cover'
     },
-
+    title: {
+        color: '#000',
+    }
 });

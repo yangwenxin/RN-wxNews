@@ -80,7 +80,7 @@ export function fetchHomeData(date) {
 
 export function fetchMeiZiData() {
     return (dispatch => {
-        api.getMeiziData("福利", 1)
+        api.getMeiziData(1)
             .then(res => {
                 if (!res.error && res.results.length > 0) {
                     dispatch(requestMeiZiSuccess(res));
