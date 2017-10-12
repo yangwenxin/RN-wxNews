@@ -22,14 +22,6 @@
 
 5. react-native run-android / run-ios
 
-## 致谢
-
-感谢Gank.io提供API接口支持
-
-## License
-
-MIT License
-
 ## 下载
 
 - Apk文件在[这里](https://github.com/yangwenxin/RN-wxNews/tree/master/android/app)
@@ -37,3 +29,11 @@ MIT License
 ## 二维码下载
 
 ![](https://github.com/yangwenxin/RN-wxNews/blob/master/wxNewsDownload.png)
+
+## 致谢
+
+感谢Gank.io提供API接口支持
+
+## License
+
+MIT License
