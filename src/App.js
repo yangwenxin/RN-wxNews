@@ -9,7 +9,7 @@ import routers from './routers';
 import * as Root from './index';
 import {BackAndroid} from 'react-native'
 import {fetchStarList} from "./redux/actions/favorData";
-import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
+import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator';
 export const AppNavigator = StackNavigator(routers, {
     headerMode: 'screen',
     transitionConfig: () => ({
