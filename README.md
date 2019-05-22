@@ -30,10 +30,3 @@
 
 ![](https://github.com/yangwenxin/RN-wxNews/blob/master/wxNewsDownload.png)
 
-## 致谢
-
-感谢Gank.io提供API接口支持
-
-## License
-
-MIT License
